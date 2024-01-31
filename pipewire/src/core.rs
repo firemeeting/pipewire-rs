@@ -126,8 +126,17 @@ impl CoreRef {
         factory_name: &str,
         properties: &impl AsRef<spa::utils::dict::DictRef>,
     ) -> Result<P, Error> {
-        let type_ = P::type_();
         let factory_name = CString::new(factory_name).expect("Null byte in factory_name parameter");
+        let factory_name_cstr = factory_name.as_c_str();
+        CoreRef::create_object_cstr(self, factory_name_cstr, properties)
+    }
+
+    pub fn create_object_cstr<P: ProxyT>(
+        &self,
+        factory_name: &CStr,
+        properties: &impl AsRef<spa::utils::dict::DictRef>,
+    ) -> Result<P, Error> {
+        let type_ = P::type_();
         let type_str = CString::new(type_.to_string())
             .expect("Null byte in string representation of type_ parameter");
 

@@ -64,6 +64,13 @@ impl Stream {
     /// Initialises a new stream with the given `name` and `properties`.
     pub fn new(core: &Core, name: &str, properties: Properties) -> Result<Self, Error> {
         let name = CString::new(name).expect("Invalid byte in stream name");
+
+        let c_str = name.as_c_str();
+        Stream::new_cstr(core, c_str, properties)
+    }
+
+    /// Initialises a new stream with the given `name` as Cstr and `properties`.
+    pub fn new_cstr(core: &Core, name: &CStr, properties: Properties) -> Result<Self, Error> {
         let stream = unsafe {
             pw_sys::pw_stream_new(core.as_raw_ptr(), name.as_ptr(), properties.into_raw())
         };
@@ -249,8 +256,18 @@ impl StreamRef {
     ///
     pub fn set_error(&mut self, res: i32, error: &str) {
         let error = CString::new(error).expect("failed to convert error to CString");
+        let error_cstr = error.as_c_str();
+        StreamRef::set_error_cstr(self, res, error_cstr)
+    }
+
+    /// Set the stream in error state with CStr
+    ///
+    /// # Panics
+    /// Will panic if `error` contains a 0 byte.
+    ///
+    pub fn set_error_cstr(&mut self, res: i32, error: &CStr) {
         unsafe {
-            pw_sys::pw_stream_set_error(self.as_raw_ptr(), res, error.as_c_str().as_ptr());
+            pw_sys::pw_stream_set_error(self.as_raw_ptr(), res, error.as_ptr());
         }
     }
 

@@ -55,6 +55,18 @@ impl Metadata {
         let key = CString::new(key).expect("Invalid byte in metadata key");
         let type_ = type_.map(|t| CString::new(t).expect("Invalid byte in metadata type"));
         let value = value.map(|v| CString::new(v).expect("Invalid byte in metadata value"));
+        let key_cstr = key.as_c_str();
+
+        Metadata::set_property_cstr(self, subject, key_cstr, type_.as_deref(), value.as_deref())
+    }
+
+    pub fn set_property_cstr(
+        &self,
+        subject: u32,
+        key: &CStr,
+        type_: Option<&CStr>,
+        value: Option<&CStr>,
+    ) {
         unsafe {
             spa::spa_interface_call_method!(
                 self.proxy.as_ptr(),
@@ -62,8 +74,8 @@ impl Metadata {
                 set_property,
                 subject,
                 key.as_ptr() as *const _,
-                type_.as_deref().map_or_else(ptr::null, CStr::as_ptr) as *const _,
-                value.as_deref().map_or_else(ptr::null, CStr::as_ptr) as *const _
+                type_.map_or_else(ptr::null, CStr::as_ptr) as *const _,
+                value.map_or_else(ptr::null, CStr::as_ptr) as *const _
             );
         }
     }

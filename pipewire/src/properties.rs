@@ -1,4 +1,10 @@
-use std::{ffi::CString, fmt, mem::ManuallyDrop, ops::Deref, ptr};
+use std::{
+    ffi::{CStr, CString},
+    fmt,
+    mem::ManuallyDrop,
+    ops::Deref,
+    ptr,
+};
 
 /// A collection of key/value pairs.
 ///
@@ -195,6 +201,11 @@ impl PropertiesRef {
     pub fn get(&self, key: &str) -> Option<&str> {
         let key = CString::new(key).expect("key contains null byte");
 
+        let key_cstr = key.as_c_str();
+        PropertiesRef::get_cstr(self, key_cstr)
+    }
+
+    pub fn get_cstr(&self, key: &CStr) -> Option<&str> {
         let res =
             unsafe { pw_sys::pw_properties_get(self.as_raw_ptr().cast_const(), key.as_ptr()) };
 

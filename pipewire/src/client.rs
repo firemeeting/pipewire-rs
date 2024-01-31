@@ -5,7 +5,10 @@ use bitflags::bitflags;
 use libc::c_void;
 use std::ops::Deref;
 use std::pin::Pin;
-use std::{ffi::CString, ptr};
+use std::{
+    ffi::{CStr, CString},
+    ptr,
+};
 use std::{fmt, mem};
 
 use crate::{
@@ -53,7 +56,11 @@ impl Client {
 
     pub fn error(&self, id: u32, res: i32, message: &str) {
         let message = CString::new(message).expect("Null byte in message parameter");
+        let message_cstr = message.as_c_str();
+        Client::error_cstr(self, id, res, message_cstr)
+    }
 
+    pub fn error_cstr(&self, id: u32, res: i32, message: &CStr) {
         unsafe {
             spa_interface_call_method!(
                 self.proxy.as_ptr(),
