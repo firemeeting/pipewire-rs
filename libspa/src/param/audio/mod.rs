@@ -51,6 +51,17 @@ impl AudioFormat {
     pub const ULAW: Self = Self(spa_sys::SPA_AUDIO_FORMAT_ULAW);
     pub const ALAW: Self = Self(spa_sys::SPA_AUDIO_FORMAT_ALAW);
 
+    pub const S16: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S16);
+    pub const U16: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U16);
+    pub const S18: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S18);
+    pub const U18: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U18);
+    pub const S20: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S20);
+    pub const U20: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U20);
+    pub const S24: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S24);
+    pub const U24: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U24);
+    pub const S32: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S32);
+    pub const U32: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U32);
+
     pub const U8P: Self = Self(spa_sys::SPA_AUDIO_FORMAT_U8P);
     pub const S16P: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S16P);
     pub const S24_32P: Self = Self(spa_sys::SPA_AUDIO_FORMAT_S24_32P);
