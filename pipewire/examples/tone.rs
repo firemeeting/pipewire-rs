@@ -30,6 +30,7 @@ pub fn main() -> Result<(), pw::Error> {
             *pw::keys::MEDIA_TYPE => "Audio",
             *pw::keys::MEDIA_ROLE => "Music",
             *pw::keys::MEDIA_CATEGORY => "Playback",
+            *pw::keys::AUDIO_CHANNELS => "2",
         },
     )?;
 
@@ -72,6 +73,10 @@ pub fn main() -> Result<(), pw::Error> {
     audio_info.set_format(spa::param::audio::AudioFormat::S16LE);
     audio_info.set_rate(DEFAULT_RATE);
     audio_info.set_channels(DEFAULT_CHANNELS);
+    let mut position = [0; spa::param::audio::MAX_CHANNELS];
+    position[0] = spa_sys::SPA_AUDIO_CHANNEL_FL;
+    position[1] = spa_sys::SPA_AUDIO_CHANNEL_FR;
+    audio_info.set_position(position);
 
     let values: Vec<u8> = pw::spa::pod::serialize::PodSerializer::serialize(
         std::io::Cursor::new(Vec::new()),
