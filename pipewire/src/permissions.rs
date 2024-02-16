@@ -16,16 +16,32 @@ bitflags! {
     }
 }
 
+#[derive(Clone, Copy)]
 #[repr(transparent)]
 pub struct Permission(pw_sys::pw_permission);
 
 impl Permission {
+    pub fn new(id: u32, flags: PermissionFlags) -> Self {
+        Self(pw_sys::pw_permission {
+            id,
+            permissions: flags.bits(),
+        })
+    }
+
     pub fn id(&self) -> u32 {
         self.0.id
     }
 
+    pub fn set_id(&mut self, id: u32) {
+        self.0.id = id;
+    }
+
     pub fn permission_flags(&self) -> PermissionFlags {
         PermissionFlags::from_bits_retain(self.0.permissions)
+    }
+
+    pub fn set_permission_flags(&mut self, flags: PermissionFlags) {
+        self.0.permissions = flags.bits();
     }
 }
 
