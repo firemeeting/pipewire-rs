@@ -6,3 +6,13 @@ members = [
   "pipewire-sys",
   "pipewire",
 ]
+
+[workspace.package]
+authors = ["Tom Wagner <tom.a.wagner@protonmail.com", "Guillaume Desmottes <guillaume.desmottes@collabora.com>"]
+categories = ["api-bindings", "multimedia"]
+edition = "2021"
+homepage = "https://pipewire.org"
+license = "MIT"
+repository = "https://gitlab.freedesktop.org/pipewire/pipewire-rs"
+rust-version = "1.74"
+version = "0.8.0"

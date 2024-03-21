@@ -1,15 +1,16 @@
 [package]
 name = "libspa-sys"
-version = "0.8.0"
-authors = ["Tom Wagner <tom.a.wagner@protonmail.com", "Guillaume Desmottes <guillaume.desmottes@collabora.com>"]
-edition = "2021"
+version.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+edition.workspace = true
 links = "libspa-0.2"
-categories = ["api-bindings", "multimedia"]
+categories.workspace = true
 description = "Rust FFI bindings for libspa"
-repository = "https://gitlab.freedesktop.org/pipewire/pipewire-rs"
-license = "MIT"
+repository.workspace = true
+license.workspace = true
 readme = "README.md"
-homepage = "https://pipewire.org"
+homepage.workspace = true
 documentation = "https://pipewire.pages.freedesktop.org/pipewire-rs/libspa_sys/"
 keywords = ["ffi", "pipewire", "multimedia", "audio", "video"]
 

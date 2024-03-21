@@ -1,15 +1,15 @@
 [package]
 name = "libspa"
-version = "0.8.0"
-authors = ["Guillaume Desmottes <guillaume.desmottes@collabora.com>"]
-rust-version = "1.74"
-edition = "2021"
-categories = ["api-bindings", "multimedia"]
+version.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+edition.workspace = true
+categories.workspace = true
 description = "Rust bindings for libspa"
-repository = "https://gitlab.freedesktop.org/pipewire/pipewire-rs"
-license = "MIT"
+repository.workspace = true
+license.workspace = true
 readme = "README.md"
-homepage = "https://pipewire.org"
+homepage.workspace = true
 documentation = "https://pipewire.pages.freedesktop.org/pipewire-rs/libspa/"
 keywords = ["pipewire", "multimedia", "audio", "video"]
 
