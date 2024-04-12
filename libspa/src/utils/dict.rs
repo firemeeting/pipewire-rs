@@ -144,9 +144,7 @@ impl std::fmt::Debug for DictRef {
 
         impl<'a> fmt::Debug for Entries<'a> {
             fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-                f.debug_map()
-                    .entries(self.0.clone().map(|(k, v)| (k, v)))
-                    .finish()
+                f.debug_map().entries(self.0.clone()).finish()
             }
         }
 
@@ -391,7 +389,7 @@ macro_rules! static_dict {
         };
 
         unsafe {
-            let ptr = &RAW as *const _ as *mut _;
+            let ptr = std::ptr::addr_of!(RAW).cast_mut();
             StaticDict::from_ptr(ptr::NonNull::new_unchecked(ptr))
         }
     }};

@@ -635,7 +635,14 @@ impl<'l> TimerSource<'l> {
         fn duration_to_timespec(duration: Duration) -> spa_sys::timespec {
             spa_sys::timespec {
                 tv_sec: duration.as_secs().try_into().expect("Duration too long"),
-                tv_nsec: duration.subsec_nanos().try_into().unwrap(),
+                // `Into` is only implemented on some platforms for these types,
+                // so use a fallible conversion.
+                // As there are a limited amount of nanoseconds in a second, this shouldn't fail
+                #[allow(clippy::unnecessary_fallible_conversions)]
+                tv_nsec: duration
+                    .subsec_nanos()
+                    .try_into()
+                    .expect("Nanoseconds should fit into timespec"),
             }
         }
 

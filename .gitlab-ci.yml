@@ -19,8 +19,8 @@ include:
 .fedora:
   variables:
     # Update this tag when you want to trigger a rebuild
-    BASE_TAG: '2023-07-15.0'
-    FDO_DISTRIBUTION_VERSION: '38'
+    BASE_TAG: '2024-04-12.0'
+    FDO_DISTRIBUTION_VERSION: '39'
     # wget: required by install-rust.sh
     # openssl-devel, perl-FindBin: required to build cargo tools
     # make: required to build cargo tools

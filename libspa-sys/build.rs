@@ -32,7 +32,7 @@ fn main() {
         // can be called via FFI
         .wrap_static_fns(true)
         .wrap_static_fns_suffix("_libspa_rs")
-        .wrap_static_fns_path(&out_path.join("static_fns"));
+        .wrap_static_fns_path(out_path.join("static_fns"));
 
     let builder = libs
         .iter()

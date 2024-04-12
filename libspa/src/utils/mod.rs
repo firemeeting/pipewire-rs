@@ -144,7 +144,7 @@ impl SpaTypes {
         Self(raw)
     }
 
-    /// Get the raw [`c_uint`](std::os::raw::c_uint) representing this `SpaTypes`.
+    /// Get the raw [`c_uint`] representing this `SpaTypes`.
     pub fn as_raw(&self) -> c_uint {
         self.0
     }

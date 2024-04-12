@@ -40,12 +40,12 @@ impl Proxies {
 
         self.proxies_t.insert(proxy_id, proxy_t);
 
-        let v = self.listeners.entry(proxy_id).or_insert_with(Vec::new);
+        let v = self.listeners.entry(proxy_id).or_default();
         v.push(listener);
     }
 
     fn add_proxy_listener(&mut self, proxy_id: u32, listener: ProxyListener) {
-        let v = self.listeners.entry(proxy_id).or_insert_with(Vec::new);
+        let v = self.listeners.entry(proxy_id).or_default();
         v.push(Box::new(listener));
     }
 

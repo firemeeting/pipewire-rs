@@ -475,6 +475,7 @@ impl<'d> Builder<'d> {
     pub fn add_control(&mut self, offset: u32, type_: u32) -> c_int {
         // Older versions of pipewire mistakenly had the return type as uint32_t,
         // so we need to use try_into().unwrap() to ensure those versions also work
+        #[allow(clippy::useless_conversion)]
         unsafe {
             spa_sys::spa_pod_builder_control(self.as_raw_ptr(), offset, type_)
                 .try_into()
