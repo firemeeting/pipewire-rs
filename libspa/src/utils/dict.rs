@@ -102,7 +102,6 @@ impl DictRef {
     ///
     /// # Examples
     /// ```
-    /// use libspa::prelude::*;
     /// use libspa::{utils::dict::StaticDict, static_dict};
     ///
     /// static DICT: StaticDict = static_dict! {

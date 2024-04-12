@@ -36,7 +36,6 @@ pub struct Properties {
 ///
 /// Any expression that evaluates to a `impl Into<Vec<u8>>` can be used for both keys and values.
 /// ```rust
-/// use pipewire::prelude::*;
 /// use pipewire::properties::properties;
 ///
 /// let key = String::from("Key");

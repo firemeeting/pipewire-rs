@@ -140,12 +140,6 @@ mod utils;
 pub use pw_sys as sys;
 pub use spa;
 
-// Re-export all the traits in a prelude module, so that applications
-// can always "use pipewire::prelude::*" without getting conflicts
-pub mod prelude {
-    pub use spa::prelude::*;
-}
-
 use std::ptr;
 
 /// Initialize PipeWire

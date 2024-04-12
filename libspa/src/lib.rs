@@ -11,6 +11,3 @@ pub mod support;
 pub mod utils;
 
 pub use spa_sys as sys;
-
-/// prelude module re-exporing all the traits providing public API.
-pub mod prelude {}
